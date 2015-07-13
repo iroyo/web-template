@@ -1,0 +1,36 @@
+{
+  "name": "Title",
+  "version": "0.0.1",
+  "description": "Description",
+  "keywords": [
+    "html5",
+    "css",
+    "front-end",
+    "web"
+  ],
+  "homepage": "http://iroyoraso.com",
+  "author": "sujac",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://iroyo@bitbucket.org/iroyo/web-template.git"
+  },
+  "directories": {
+    "dist": "dist",
+    "src": "src",
+    "test": "test"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-csscomb": "^3.0.6",
+    "gulp-csso": "^1.0.0",
+    "gulp-header": "^1.2.2",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-newer": "^0.5.1",
+    "gulp-shorthand": "^1.1.0",
+    "gulp-stylus": "^2.0.5",
+    "gulp-uncss": "^1.0.2"
+  }
+}
