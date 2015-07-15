@@ -53,13 +53,27 @@ gulp.task('paths', function() {
         .pipe(gulp.dest(dirs.src));
 });
 
+
+// Change paths in the HTML
 gulp.task('replace', function() {
     gulp.src(dirs.src + '/index.html')
         .pipe($.htmlReplace({
             'css-vendor': 'css/styles.min.css',
             'css-main': 'css/styles.min.css',
-            'js-vendor': 'js/vendor.min.css',
-            'js-main': 'js/main.min.css',
+            'js-vendor': 'js/vendor.min.js',
+            'js-main': 'js/main.min.js',
         }))
         .pipe(gulp.dest(dirs.dist));
+});
+
+gulp.task('images', function() {
+    return gulp.src(dirs.src + '/images/*')
+        .pipe($.imagemin({
+            progressive: true,
+            interlaced: true,
+            svgoPlugins: [{
+                cleanupIDs: false
+            }]
+        }))
+        .pipe(gulp.dest(dirs.dist + '/images'));
 });
