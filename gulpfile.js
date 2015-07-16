@@ -13,11 +13,11 @@ var banner = ['/**',
     ''
 ].join('\n');
 
+// ***** Development tasks ****** //
 
 // minify new images
-gulp.task('style', function() {
-    gulp.src(dirs.src + '/stylus/*.styl')
-        .pipe($.newer(dirs.src + '/css'))
+gulp.task('style:dev', function() {
+    return gulp.src(dirs.src + '/stylus/*.styl')
         .pipe($.stylus())
         .pipe($.autoprefixer())
         .pipe(gulp.dest(dirs.src + '/css'));
@@ -25,7 +25,7 @@ gulp.task('style', function() {
 
 // Update paths of index.html
 gulp.task('paths', function() {
-    gulp.src(dirs.src + '/index.html')
+    return gulp.src(dirs.src + '/index.html')
         .pipe($.inject(gulp.src(dirs.src + '/js/*.js', {
             read: false
         }), {
@@ -53,27 +53,63 @@ gulp.task('paths', function() {
         .pipe(gulp.dest(dirs.src));
 });
 
+// Copy images into the dist folder
+gulp.task('images', function() {
+    return gulp.src(dirs.src + '/images/**/*.{png,jpg,jpeg,gif,svg}')
+        .pipe(gulp.dest(dirs.dist + '/images'));
+});
+
+// ***** Build tasks ****** //
+
+// Concat
+gulp.task('style:build', function() {
+    gulp.src(dirs.src + '/css/*.css')
+        .pipe($.concatCss('main.min.css'))
+        .pipe($.shorthand())
+        .pipe($.csscomb())
+        .pipe($.csso())
+        .pipe($.header(banner, { pkg : pkg }))
+        .pipe(gulp.dest(dirs.dist + '/css'));
+    gulp.src(dirs.src + '/css/vendor/*.css')
+        .pipe($.concatCss('vendor.min.css'))
+        .pipe($.csso())
+        .pipe($.header(banner, { pkg : pkg }))
+        .pipe(gulp.dest(dirs.dist + '/css'));
+});
+
+gulp.task('scripts:build', function() {
+    gulp.src(dirs.src + '/js/*.js')
+        .pipe($.concat('main.min.js'))
+        .pipe($.uglify())
+        .pipe($.header(banner, { pkg : pkg }))
+        .pipe(gulp.dest(dirs.dist + '/js'));
+    gulp.src(dirs.src + '/js/vendor/*.js')
+        .pipe($.concat('vendor.min.js'))
+        .pipe($.uglify())
+        .pipe($.header(banner, { pkg : pkg }))
+        .pipe(gulp.dest(dirs.dist + '/js'));
+});
 
 // Change paths in the HTML
 gulp.task('replace', function() {
-    gulp.src(dirs.src + '/index.html')
+    return gulp.src(dirs.src + '/index.html')
         .pipe($.htmlReplace({
-            'css-vendor': 'css/styles.min.css',
-            'css-main': 'css/styles.min.css',
+            'css-vendor': 'css/vendor.min.css',
+            'css-main': 'css/main.min.css',
             'js-vendor': 'js/vendor.min.js',
             'js-main': 'js/main.min.js',
         }))
         .pipe(gulp.dest(dirs.dist));
 });
 
-gulp.task('images', function() {
-    return gulp.src(dirs.src + '/images/*')
-        .pipe($.imagemin({
-            progressive: true,
-            interlaced: true,
-            svgoPlugins: [{
-                cleanupIDs: false
-            }]
-        }))
-        .pipe(gulp.dest(dirs.dist + '/images'));
+gulp.task('build',['style:build', 'scripts:build', 'images', 'replace']);
+
+// ***** ************ ****** //
+
+// Watch for changes in src files
+gulp.task('watch', function() {
+    gulp.watch(dirs.src + '/stylus/*.styl', ['style:dev']);
+    gulp.watch([dirs.src + '/css/*.css', dirs.src + '/js/*.js'], ['paths']);
+    gulp.watch(dirs.src + '/images/**/*.{png,jpg,jpeg,gif,svg}', ['images']);
+
 });
