@@ -16,15 +16,17 @@ var banner = ['/**',
 // ***** Development tasks ****** //
 
 // minify new images
-gulp.task('style:dev', function() {
+gulp.task('styles:dev', function() {
+    console.log("TASK - Stylus");
     return gulp.src(dirs.src + '/stylus/*.styl')
         .pipe($.stylus())
-        .pipe($.autoprefixer())
+        .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(gulp.dest(dirs.src + '/css'));
 });
 
 // Update paths of index.html
 gulp.task('paths', function() {
+    console.log("TASK - Add paths");
     return gulp.src(dirs.src + '/index.html')
         .pipe($.inject(gulp.src(dirs.src + '/js/*.js', {
             read: false
@@ -55,6 +57,7 @@ gulp.task('paths', function() {
 
 // Copy images into the dist folder
 gulp.task('images', function() {
+    console.log("TASK - Images");
     return gulp.src(dirs.src + '/images/**/*.{png,jpg,jpeg,gif,svg}')
         .pipe(gulp.dest(dirs.dist + '/images'));
 });
@@ -62,36 +65,53 @@ gulp.task('images', function() {
 // ***** Build tasks ****** //
 
 // Concat
-gulp.task('style:build', function() {
+gulp.task('styles:build', function() {
+    console.log("TASK - Analyze css");
     gulp.src(dirs.src + '/css/*.css')
         .pipe($.concatCss('main.min.css'))
         .pipe($.shorthand())
         .pipe($.csscomb())
         .pipe($.csso())
-        .pipe($.header(banner, { pkg : pkg }))
+        .pipe($.header(banner, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest(dirs.dist + '/css'));
     gulp.src(dirs.src + '/css/vendor/*.css')
-        .pipe($.concatCss('vendor.min.css'))
+        .pipe($.concatCss('vendor.css'))
         .pipe($.csso())
-        .pipe($.header(banner, { pkg : pkg }))
+        .pipe($.rename({
+            suffix: ".min"
+        }))
+        .pipe($.header(banner, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest(dirs.dist + '/css'));
 });
 
 gulp.task('scripts:build', function() {
+    console.log("TASK - Concat javascript");
     gulp.src(dirs.src + '/js/*.js')
-        .pipe($.concat('main.min.js'))
+        .pipe($.concat('main.js'))
         .pipe($.uglify())
-        .pipe($.header(banner, { pkg : pkg }))
+        .pipe($.rename({
+            suffix: ".min"
+        }))
+        .pipe($.header(banner, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest(dirs.dist + '/js'));
     gulp.src(dirs.src + '/js/vendor/*.js')
         .pipe($.concat('vendor.min.js'))
         .pipe($.uglify())
-        .pipe($.header(banner, { pkg : pkg }))
+        .pipe($.header(banner, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest(dirs.dist + '/js'));
 });
 
 // Change paths in the HTML
 gulp.task('replace', function() {
+    console.log("TASK - Update paths");
     return gulp.src(dirs.src + '/index.html')
         .pipe($.htmlReplace({
             'css-vendor': 'css/vendor.min.css',
@@ -102,13 +122,13 @@ gulp.task('replace', function() {
         .pipe(gulp.dest(dirs.dist));
 });
 
-gulp.task('build',['style:build', 'scripts:build', 'images', 'replace']);
+gulp.task('build', ['styles:build', 'scripts:build', 'images', 'replace']);
 
 // ***** ************ ****** //
 
 // Watch for changes in src files
 gulp.task('watch', function() {
-    gulp.watch(dirs.src + '/stylus/*.styl', ['style:dev']);
+    gulp.watch(dirs.src + '/stylus/*.styl', ['styles:dev']);
     gulp.watch([dirs.src + '/css/*.css', dirs.src + '/js/*.js'], ['paths']);
     gulp.watch(dirs.src + '/images/**/*.{png,jpg,jpeg,gif,svg}', ['images']);
 
