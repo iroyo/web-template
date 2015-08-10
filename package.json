@@ -17,14 +17,14 @@
     },
     "directories": {
         "dist": {
-            "index" : "dist/",
-            "images" : "dist/images/",
+            "index": "dist/",
+            "images": "dist/images/",
             "css": "dist/css/",
             "js": "dist/js/"
         },
         "src": {
-            "index" : "src/",
-            "images" : "src/images/",
+            "index": "src/",
+            "images": "src/images/",
             "stylus": "src/stylus/",
             "css": {
                 "vendor": "src/css/vendor/",
