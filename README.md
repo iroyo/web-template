@@ -16,7 +16,7 @@ Get this project via:
 3. Within your terminal navigate where the project is located.
 3. Run `npm install` to install all the dependencies.
 
-## Task built-in
+## Tasks built-in
 * `replace`: Changes paths in the html for the buil version.
 * `paths`: Automaically updates paths of index.html.
 * `images`: Copies images into the build folder.
