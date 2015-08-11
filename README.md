@@ -8,10 +8,10 @@ Get this project via:
 * Clone this repository 
 * Download ZIP
 
-The HTML5 Boilerplate website is a simple static site:
+Get this project via:
 
-* The development code is in the [`src/`](src) directory.
-* The build process relies on [`gulp`](http://gulpjs.com/).
+* Clone this repository.
+* Download ZIP.
 
 1. Install [`io.js`](https://iojs.org/en/index.html) /
    [`Node.js`](https://nodejs.org/download/).
