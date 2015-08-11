@@ -15,7 +15,7 @@ var banner = ['/**',
 
 // ***** Development tasks ****** //
 
-// minify new images
+// converts stylus to css
 gulp.task('styles:dev', function() {
     console.log("TASK - Stylus");
     return gulp.src(dirs.src.stylus + '*.styl')
@@ -71,14 +71,14 @@ gulp.task('styles:build', function() {
         .pipe($.concatCss('main.min.css'))
         .pipe($.shorthand())
         .pipe($.csscomb())
-        .pipe($.csso())
+        .pipe($.minifyCss())
         .pipe($.header(banner, {
             pkg: pkg
         }))
         .pipe(gulp.dest(dirs.dist.css));
     gulp.src(dirs.src.css.vendor + '*.css')
         .pipe($.concatCss('vendor.css'))
-        .pipe($.csso())
+        .pipe($.minifyCss())
         .pipe($.rename({
             suffix: ".min"
         }))
