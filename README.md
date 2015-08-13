@@ -44,8 +44,8 @@ While developing just use `gulp watch`. This task will:
 #### Production
 When everything is ready to ship use `gulp build`. This task will:
 
-* Concat all _.css_ files into one and perform [other tasks](#styles-b).
-* Concat all _.js_ files into one and perform [other tasks](#scripts-b).
+* Concat all _.css_ files into one and perform other tasks.
+* Concat all _.js_ files into one and perform other tasks.
 * Automatically update paths of the index.html.
 
 ## Directory structure
@@ -70,10 +70,10 @@ Next the description of every gulp task in this project:
 * `paths`: Automaically updates paths of index.html.
 * `images`: Copies images into the build folder.
 * `styles:dev`: Convert _.styl_ files into _.css_ and apply autoprefixer process to it.
-* <a name="styles-b">`styles:build`</a>: Concat all styles and applies:
+* `styles:build`: Concat all styles and applies:
 	* shorthand: makes your CSS files lighter and more readable.
 	* csscomb: sorting CSS properties in specific order.
 	* csso: minimize css.
-* <a name="scripts-b">`scripts:build`</a>: Concats all _.js_ files and applies:
+* `scripts:build`: Concats all _.js_ files and applies:
 	* uglify: compresses code.
 	* header: adds a header to the file.
