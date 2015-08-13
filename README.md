@@ -5,14 +5,14 @@ No additional libraries added to simplify set up. Just add your favorite ones in
 
 ## Index
 
-* ##### [Project description](#description).
-* ##### [Tecnologies and languages used in this project](#tecnologies).
-* ##### [Basic setup: Intsalling Node, Gulp](#setup).
-* ##### [Gulp usage](#gulp-usage).
+* [Project description](#description).
+* [Tecnologies and languages used in this project](#tecnologies).
+* [Basic setup: Intsalling Node, Gulp](#setup).
+* [Gulp usage](#gulp-usage).
 	* [While developing](#develop).
 	* [For production](#production).
-* ##### [Folder structure](#directory-structure).
-* ##### [Task list Gulp](#tasks-built-in).
+* [Folder structure](#directory-structure).
+* [Task list Gulp](#tasks-built-in).
 
 ## Description
 
@@ -65,6 +65,7 @@ When everything is ready to ship use `gulp build`. This task will:
 
 ## Tasks built-in
 Next the description of every gulp task in this project:
+
 * `replace`: Changes paths in the html for the buil version.
 * `paths`: Automaically updates paths of index.html.
 * `images`: Copies images into the build folder.
