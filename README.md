@@ -22,10 +22,7 @@ No additional libraries added to simplify set up. Just add your favorite ones in
 
 ## Setup
 
-Get this project via:
-
-* Clone this repository.
-* Download ZIP.
+Get this project via: Clone this repository __or__ Download ZIP.
 
 1. Install [`io.js`](https://iojs.org/en/index.html) / [`Node.js`](https://nodejs.org/download/).
 2. Install [`gulp.js`](http://gulpjs.com/) by running `npm install --global gulp` on the terminal.
