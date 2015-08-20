@@ -18,8 +18,9 @@ No additional libraries added to simplify set up. Just add your favorite ones in
 
 This project is meant to be used as a starting point, like a starter kit. It's basically designed for static web development. It doesn't come with any extra libraries. Just add the minified files of the libraries you want to use on the adequate folder and start using them, no necessity to manually add links to your html. Not adding any library by default was a meditated decision I made since I could have implemented [bower](https://github.com/bower/bower) for all web dependencies but every project require different libraries.
 
-## Tecnologies
+## Technologies
 
+As for technologies as I said I did not choose any framework or library but for styles I opted for [Stylus](https://learnboost.github.io/stylus/). In addition as a build system I've chosen [Gulp.js](http://gulpjs.com/).
 
 ## Setup
 
